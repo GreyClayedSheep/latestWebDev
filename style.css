@@ -259,15 +259,10 @@ p {
 
 }
 
-/* Media query for screens wider than 800px */
-@media (min-width: 800px) {
-   
-}
-
 .page{width:100%;height:600vh;}
-#page1{background:red}
-#page2{background:green}
-#page3{background:blue}
+#page1{background:gray}
+#page2{background:gray}
+#page3{background:gray}
 
 
 .card-container {
@@ -296,10 +291,14 @@ p {
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
     transition: transform 1.0s;
+    
 }
 
 .card .front {
     background: #f0f0f0;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 2px 2px gray;
 }
 
 .card .back {
@@ -329,3 +328,118 @@ p {
     width: 100%; 
 }
 
+/* General styles for the calculator section */
+#page2 {
+    text-align: center; /* Centers the content within the page2 section */
+}
+
+/* Style for input boxes */
+input[type="number"] {
+    width: 30%; /* Set a relative width */
+    font-size: 2.5em; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; /* Round the corners */
+    padding: 40px;
+
+}
+
+/* Style for buttons */
+#addBtn, #multiplyBtn {
+    width: 10%; /* Set a relative width */
+    font-size: 1.5em; 
+    padding: 5px;
+    color: white; 
+    background-color: #007BFF; 
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+#addBtn:hover {
+    background-color: #0056b3; /* Darker shade on hover for feedback */
+}
+
+#multiplyBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Style for result text */
+#resultText {
+    font-size: 2em; 
+    color: #333; 
+    border-radius: 5px; 
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px orange;
+
+}
+
+#page3 h2, #page3 button, #page3 input {
+    font-size: 1.5em;
+}
+
+#page3 button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: orange;
+    color: white;
+}
+
+#page3 button:hover {
+    background-color: #45a049;
+}
+
+#page3 input {
+    padding: 8px;
+    margin: 10px;
+    width: 25%;
+}
+
+#page3 {
+    text-align: center;
+}
+
+#question {
+    font-size: 2em; 
+    color: white; 
+    background-color: black;
+    box-shadow: 0 2px 4px rgba(0,0,0,1);
+}
+
+#timer {
+    font-size: 3em; 
+    color: #ff0000; 
+    text-shadow: 2px 2px darkred;
+}
+
+#resultDisplay {
+    font-size: 2em; 
+    color: #333; 
+    border-radius: 5px; 
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px orange;
+
+}
+
+h3 {
+    text-align: center;
+    font-size: 3em; 
+    color: #333; 
+    text-shadow: 1px 1px white;
+}
+
+@media (max-width: 800px) {
+    button {
+        width: 40%;
+        font-size: 2em;
+    }
+
+    #addBtn, #multiplyBtn {
+        width: 40%; 
+    }
+
+    input[type="number"]{
+        width: 70%; 
+    }
+}

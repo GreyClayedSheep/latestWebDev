@@ -23,6 +23,7 @@ function show(pgno)
     //show the page
     onepage.style.display="block";
 }
+
 /*Listen for clicks on the buttons, assign anonymous
 eventhandler functions to call show function*/
 page1btn.addEventListener("click", function () 
@@ -123,4 +124,89 @@ function createImageElement(imageFile, denominator) {
     imgElement.style.objectFit = 'contain';
     return imgElement;
 }
+
+// Page 3
+
+document.getElementById('easyBtn').addEventListener('click', () => startGame('easy'));
+document.getElementById('mediumBtn').addEventListener('click', () => startGame('medium'));
+document.getElementById('hardBtn').addEventListener('click', () => startGame('hard'));
+
+function startGame(difficulty) {
+    setButtonState(true); // Disable buttons when game starts
+    let score = 0;
+    let questionCount = 0;
+    const totalQuestions = 5;
+    let startTime = difficulty === 'hard' ? 20 : 30; // 20 seconds for hard, 30 for others
+    document.getElementById('quizContainer').style.display = 'block';
+
+    nextQuestion();
+
+    const timer = setInterval(() => {
+        if (startTime <= 0 || questionCount >= totalQuestions) {
+            clearInterval(timer);
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultDisplay').innerHTML = `Game Over! Your score: ${score}/${totalQuestions}`;
+            setButtonState(false); // Re-enable buttons when game ends
+            return;
+        }
+        document.getElementById('timer').textContent = `Time left: ${startTime} seconds`;
+        startTime--;
+    }, 1000);
+
+    function nextQuestion() {
+        if (questionCount < totalQuestions) {
+            const question = generateQuestion(difficulty);
+            document.getElementById('question').textContent = question.text;
+            const submitBtn = document.getElementById('submitAnswerBtn');
+            submitBtn.onclick = () => {
+                const userAnswer = parseInt(document.getElementById('userAnswer').value);
+                if (userAnswer === question.answer) {
+                    score++;
+                }
+                questionCount++;
+                document.getElementById('userAnswer').value = ''; // Clear input
+                nextQuestion();
+            };
+        }
+    }
+}
+
+function generateQuestion(difficulty) {
+    let maxNum;
+    switch (difficulty) {
+        case 'easy':
+            maxNum = 10;
+            break;
+        case 'medium':
+            maxNum = 50;
+            break;
+        case 'hard':
+            maxNum = 100;
+            break;
+    }
+    const num1 = Math.floor(Math.random() * maxNum) + 1;
+    const num2 = Math.floor(Math.random() * maxNum) + 1;
+    const operations = ['+', '-', '*'];
+    const operation = operations[Math.floor(Math.random() * operations.length)];
+    let answer;
+    switch (operation) {
+        case '+':
+            answer = num1 + num2;
+            break;
+        case '-':
+            answer = num1 - num2;
+            break;
+        case '*':
+            answer = num1 * num2;
+            break;
+    }
+    return { text: `What is ${num1} ${operation} ${num2}?`, answer: answer };
+}
+
+function setButtonState(disabled) {
+    document.getElementById('easyBtn').disabled = disabled;
+    document.getElementById('mediumBtn').disabled = disabled;
+    document.getElementById('hardBtn').disabled = disabled;
+}
+
 
